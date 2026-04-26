@@ -11,19 +11,65 @@ Two folders, one shared design system, and a layered docs layer that makes both 
 - **`.claude/skills/`** — A bundled `note-synthesise` skill that triggers automatically when you ask to synthesise notes.
 - **Reference docs** at root and in each folder so agents orient cheaply: `MAP.md`, `AGENTS.md`, `SCHEMA.md`, `SYSTEM.md`, `PROCESSES.md`, `CONVENTIONS.md`, `SKILLS.md`.
 
-## Cloning for a new project
+## Starting a new project from this template
+
+### Recommended: GitHub "Use this template"
+
+One-time setup: on this template repo's GitHub page, go to Settings → General → tick **Template repository**.
+
+For each new project after that:
+
+1. On GitHub, click the green **Use this template** button on the template repo and create a new repo.
+2. Locally:
 
 ```bash
-git clone <this-template-url> my-project
-cd my-project
+git clone https://github.com/<you>/<new-repo>.git
+cd <new-repo>
 rm -rf notes/_examples prototypes/_examples
-# Edit README.md, replace this section with your project's name + purpose
-git remote remove origin
-git remote add origin <your-new-repo-url>
-git push -u origin main
+./check.sh
+# edit README.md to set the project's name + purpose
+git add . && git commit -m "Initial commit" && git push
 ```
 
-After cloning, read `MAP.md` for the architecture, then `notes/AGENTS.md` and `prototypes/AGENTS.md` for folder-specific rules.
+This is preferable because the new repo has no shared git history with the template (cleaner log) and GitHub records the "Created from `<template>`" link for traceability.
+
+### Alternative: plain `git clone`
+
+If you don't want to enable the GitHub template setting, the manual flow:
+
+```bash
+git clone https://github.com/<you>/<this-template>.git my-new-project
+cd my-new-project
+git remote set-url origin https://github.com/<you>/my-new-project.git
+rm -rf notes/_examples prototypes/_examples
+./check.sh
+# edit README.md
+git add . && git commit -m "Initial commit from template" && git push -u origin main
+```
+
+### One-time machine setup
+
+The drift checker (`check.sh`) needs PyYAML for full coverage. Install once per machine:
+
+```bash
+pip3 install pyyaml          # or: pip3 install --user pyyaml
+```
+
+Without PyYAML, `check.sh` skips frontmatter validation but the other three checks still run.
+
+### Optional: alias the cleanup
+
+If you find yourself initialising new projects often, drop this in your shell config:
+
+```bash
+alias init-template='rm -rf notes/_examples prototypes/_examples && ./check.sh'
+```
+
+Then `init-template` from any freshly-cloned project runs cleanup and verification in one step.
+
+### After cloning
+
+Read `MAP.md` for the architecture, then `notes/AGENTS.md` and `prototypes/AGENTS.md` for folder-specific rules.
 
 ## Daily use
 
