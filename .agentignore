@@ -1,0 +1,19 @@
+# Paths agents should skip when assembling default context.
+# Override case-by-case when the user asks explicitly (e.g. "include archived").
+
+# Reference content — read intentionally, not by default
+**/_examples/
+
+# Archived notes — kept for history, not for synthesis
+notes/archive/
+notes/**/*.archived.md
+
+# Build outputs (if any prototype graduates to a sub-project)
+**/node_modules/
+**/dist/
+**/build/
+
+# OS / editor noise
+.DS_Store
+.vscode/
+.idea/

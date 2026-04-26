@@ -1,0 +1,34 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor caches
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node (if a prototype graduates to a sub-project)
+node_modules/
+dist/
+build/
+*.log
+.npm/
+.yarn/
+
+# Secrets — never commit
+.env
+.env.*
+*.pem
+*.key
+
+# Local agent / Claude caches
+.auto-memory/
+.claude/cache/
+
+# Python (if any tooling)
+__pycache__/
+*.pyc
+.venv/
+venv/

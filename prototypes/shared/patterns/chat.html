@@ -1,0 +1,64 @@
+<!--
+  Chat pattern — copy-paste reference markup.
+  Uses .chat-* classes from shared/styles.css and helpers from shared/chat.js.
+  Drop the markup into your prototype's <main>, then wire up via Chat.* calls.
+-->
+
+<div class="chat" id="my-chat">
+
+  <div class="chat-thread" id="my-chat-thread">
+    <div class="chat-message chat-message--ai">
+      Hello — how can I help you today?
+    </div>
+  </div>
+
+  <form class="chat-input" id="my-chat-form">
+    <textarea
+      id="my-chat-input"
+      placeholder="Type a message…"
+      rows="1"
+    ></textarea>
+    <button class="btn" type="submit">Send</button>
+  </form>
+
+</div>
+
+<script>
+  // Wire up the chat. Requires shared/chat.js.
+  (function () {
+    const thread = document.getElementById('my-chat-thread');
+    const input  = document.getElementById('my-chat-input');
+    const form   = document.getElementById('my-chat-form');
+
+    Chat.bindAutoGrow(input);
+
+    function send(value) {
+      Chat.append(thread, 'user', value);
+      const typing = Chat.showTyping(thread);
+
+      // Replace this with your real backend call.
+      setTimeout(() => {
+        Chat.hideTyping(typing);
+        const bubble = Chat.append(thread, 'ai', '');
+        const push = Chat.stream(bubble, thread);
+        const reply = 'I received: ' + value;
+        let i = 0;
+        const tick = setInterval(() => {
+          push(reply[i++]);
+          if (i >= reply.length) { clearInterval(tick); push(null); }
+        }, 20);
+      }, 600);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+      send(value);
+      input.value = '';
+      input.style.height = 'auto';
+    });
+
+    Chat.bindEnterSubmit(input, send);
+  })();
+</script>

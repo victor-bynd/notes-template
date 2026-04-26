@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example dashboard — Prototype</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="shell">
+
+    <header class="shell-header">
+      <div class="container-wide row-between">
+        <a href="../index.html" class="brand">prototypes / example-dashboard</a>
+        <nav class="nav">
+          <a href="../index.html">Index</a>
+          <a href="../prototypes.md">Manifest</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shell-main">
+      <div class="container-wide stack-lg">
+
+        <div class="row-between">
+          <div class="stack">
+            <span class="eyebrow">Example</span>
+            <h1>Project dashboard</h1>
+            <p class="lead">Demonstrates how shared components compose into a real-shaped prototype. Delete <code class="code">_examples/</code> when initialising a project.</p>
+          </div>
+          <div class="row">
+            <button class="btn btn-secondary" data-action="open-dialog" data-target="#info">About</button>
+            <button class="btn" data-action="toast" data-message="Saved">Save</button>
+          </div>
+        </div>
+
+        <hr class="hr">
+
+        <!-- Tab nav -->
+        <div class="tabs" data-tabs>
+          <button class="tab" aria-selected="true" data-action="activate-tab" data-target="tab-overview">Overview</button>
+          <button class="tab" aria-selected="false" data-action="activate-tab" data-target="tab-flow">Flow</button>
+          <button class="tab" aria-selected="false" data-action="activate-tab" data-target="tab-activity">Activity</button>
+        </div>
+
+        <!-- Overview panel -->
+        <section id="tab-overview" class="tab-panel stack-lg">
+          <div class="grid grid-3">
+            <div class="card stack-sm">
+              <span class="eyebrow">Notes</span>
+              <div style="font-size: var(--t-2xl); font-weight: 600;">42</div>
+              <span class="muted">12 active · 5 draft · 25 synthesised</span>
+            </div>
+            <div class="card stack-sm">
+              <span class="eyebrow">Prototypes</span>
+              <div style="font-size: var(--t-2xl); font-weight: 600;">7</div>
+              <span class="muted">2 active · 5 draft</span>
+            </div>
+            <div class="card stack-sm">
+              <span class="eyebrow">Open questions</span>
+              <div style="font-size: var(--t-2xl); font-weight: 600;">14</div>
+              <span class="muted">across 8 notes</span>
+            </div>
+          </div>
+
+          <div class="banner banner-accent">
+            <span><strong>Heads up.</strong> 3 drafts have been open for &gt; 30 days. Promote or archive them to keep the index honest.</span>
+          </div>
+
+          <div class="stack">
+            <h2>Recent notes</h2>
+            <ul class="list">
+              <li class="list-item row-between">
+                <div>
+                  <div><strong>oauth-flow-discovery-2026-04-22.md</strong></div>
+                  <div class="muted">Mapped the full passwordless flow against three identity providers.</div>
+                </div>
+                <div class="row">
+                  <span class="badge badge-ok">active</span>
+                  <span class="mono muted">Apr 22</span>
+                </div>
+              </li>
+              <li class="list-item row-between">
+                <div>
+                  <div><strong>cookie-banner-patterns-2026-04-19.md</strong></div>
+                  <div class="muted">Patterns survey of consent banner placements across 12 SaaS products.</div>
+                </div>
+                <div class="row">
+                  <span class="badge">synthesised</span>
+                  <span class="mono muted">Apr 19</span>
+                </div>
+              </li>
+              <li class="list-item row-between">
+                <div>
+                  <div><strong>onboarding-friction-2026-04-15.md</strong></div>
+                  <div class="muted">Where new-user friction concentrates in the current signup flow.</div>
+                </div>
+                <div class="row">
+                  <span class="badge badge-warn">draft</span>
+                  <span class="mono muted">Apr 15</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Flow panel — uses Mermaid -->
+        <section id="tab-flow" class="tab-panel stack" hidden>
+          <h2>Note lifecycle</h2>
+          <p class="muted">Mermaid diagram rendered via <code class="code">shared/mermaid.js</code>.</p>
+          <div class="card">
+            <pre class="mermaid">
+stateDiagram-v2
+  [*] --> draft
+  draft --> active : promote
+  active --> synthesised : extracted into derived work
+  active --> archived : no longer relevant
+  synthesised --> archived
+  draft --> archived
+  archived --> [*]
+            </pre>
+          </div>
+        </section>
+
+        <!-- Activity panel -->
+        <section id="tab-activity" class="tab-panel stack" hidden>
+          <h2>Recent activity</h2>
+          <table class="table">
+            <thead>
+              <tr><th>When</th><th>Action</th><th>Target</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="mono">Apr 22 · 14:02</td><td>Synthesised</td><td>oauth-flow-discovery</td><td><span class="badge badge-ok">done</span></td></tr>
+              <tr><td class="mono">Apr 21 · 09:30</td><td>Promoted</td><td>cookie-banner-patterns</td><td><span class="badge badge-ok">done</span></td></tr>
+              <tr><td class="mono">Apr 19 · 16:45</td><td>Created</td><td>onboarding-friction</td><td><span class="badge badge-warn">draft</span></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="shell-footer">
+      <div class="container-wide row-between">
+        <span>prototypes // example-dashboard</span>
+        <span>v0.1 · low-fi</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- About dialog -->
+  <dialog id="info" class="dialog">
+    <div class="dialog-header">
+      <strong>About this prototype</strong>
+      <button class="dialog-close" data-action="close-dialog">&times;</button>
+    </div>
+    <div class="dialog-body">
+      <p>This is an example prototype demonstrating composition of shared components: tabs, cards, lists, banner, table, dialog, toast, and a Mermaid diagram.</p>
+      <p class="muted" style="margin-top: var(--s-3);">Read <code class="code">prototypes/SYSTEM.md</code> for the full vocabulary.</p>
+    </div>
+    <div class="dialog-footer">
+      <button class="btn" data-action="close-dialog">Close</button>
+    </div>
+  </dialog>
+
+  <script src="../shared/ui.js" defer></script>
+  <script type="module" src="../shared/mermaid.js"></script>
+</body>
+</html>

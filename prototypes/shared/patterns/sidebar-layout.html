@@ -1,0 +1,49 @@
+<!--
+  Sidebar layout pattern — copy-paste reference markup.
+  Uses .app-shell + .sidebar classes from shared/styles.css.
+  Two layouts shown: persistent left nav (desktop) and slide-in sidebar (overlay).
+-->
+
+<!-- Variant A: persistent left nav. Best for tools, dashboards. -->
+<div class="app-shell">
+
+  <aside class="app-shell-nav">
+    <div class="stack">
+      <a href="#" class="brand">prototype</a>
+      <nav class="stack-sm">
+        <a href="#">Overview</a>
+        <a href="#">Activity</a>
+        <a href="#">Settings</a>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="app-shell-main">
+    <div class="stack-lg">
+      <h1>Page title</h1>
+      <p class="lead">Main content goes here.</p>
+    </div>
+  </main>
+
+</div>
+
+
+<!-- Variant B: slide-in sidebar. Best for mobile-first or contextual nav.
+     Trigger via data-action attributes — wired by shared/ui.js. -->
+
+<button class="btn btn-secondary" data-action="open-sidebar" data-target="#nav-drawer">
+  Open menu
+</button>
+
+<aside id="nav-drawer" class="sidebar" data-state="closed">
+  <div class="row-between" style="margin-bottom: var(--s-4);">
+    <span class="eyebrow">Menu</span>
+    <button class="dialog-close" data-action="close-sidebar" data-target="#nav-drawer">×</button>
+  </div>
+  <nav class="stack-sm">
+    <a href="#">Overview</a>
+    <a href="#">Activity</a>
+    <a href="#">Settings</a>
+  </nav>
+</aside>
+<div class="sidebar-overlay"></div>
