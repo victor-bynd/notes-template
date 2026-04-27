@@ -55,13 +55,14 @@ else:
     css_classes = set(re.findall(r'(?<![A-Za-z0-9_])\.([a-z][a-z0-9_-]*)', css_no_comments))
     # Skip state-modifier classes that exist only as compound selectors.
     # These are documented at the component level, not as standalone classes.
-    css_classes -= {'active'}
+    STATE_CLASSES = {'active', 'is-active'}
+    css_classes -= STATE_CLASSES
     # Extract documented classes from SYSTEM.md (in `.classname` backticks).
     # Strip file extensions — file extensions are sometimes written as `.svg`,
     # `.png`, etc. in docs and would otherwise be confused for class references.
     FILE_EXTENSIONS = {'svg','png','jpg','jpeg','gif','webp','pdf','md','html','htm',
                        'css','js','json','yaml','yml','xml','txt','sh','drawio','excalidraw'}
-    sys_classes = set(re.findall(r'`\.([a-z][a-z0-9_-]*)`', sys_text)) - FILE_EXTENSIONS
+    sys_classes = set(re.findall(r'`\.([a-z][a-z0-9_-]*)`', sys_text)) - FILE_EXTENSIONS - STATE_CLASSES
 
     missing_in_doc = css_classes - sys_classes
     missing_in_css = sys_classes - css_classes
@@ -106,6 +107,35 @@ if os.path.exists(CSS):
             print(f"        .{c}")
     else:
         ok("All HTML classes are defined in styles.css")
+
+# ---------- 2b. proto-switcher.js list vs prototypes.md ----------
+print("\n== Prototype switcher list drift ==")
+
+PSW = 'prototypes/shared/proto-switcher.js'
+PMD = 'prototypes/prototypes.md'
+if os.path.exists(PSW) and os.path.exists(PMD):
+    psw_text = open(PSW).read()
+    pmd_text = open(PMD).read()
+    # Files referenced in proto-switcher.js
+    psw_files = set(re.findall(r"file:\s*'([^']+)'", psw_text))
+    # Files in prototypes.md (file: `name.html`), excluding _template.html
+    pmd_files = set(re.findall(r"-\s*file:\s*`([^`]+)`", pmd_text)) - {'_template.html'}
+    # _examples/ entries are allowed in proto-switcher.js without being in
+    # prototypes.md (the manifest excludes example content by design).
+    psw_real = {f for f in psw_files if not f.startswith('_examples/')}
+    missing_in_psw = pmd_files - psw_real
+    extra_in_psw   = psw_real - pmd_files
+    if not (missing_in_psw or extra_in_psw):
+        ok("proto-switcher.js list matches prototypes.md")
+    else:
+        if missing_in_psw:
+            fail("Prototypes in prototypes.md but missing from proto-switcher.js:")
+            for f in sorted(missing_in_psw): print(f"        {f}")
+        if extra_in_psw:
+            fail("Prototypes in proto-switcher.js but not in prototypes.md:")
+            for f in sorted(extra_in_psw): print(f"        {f}")
+else:
+    print(f"[SKIP] Missing {PSW} or {PMD}")
 
 # ---------- 3. Notes in folder vs INDEX.md ----------
 print("\n== Notes index drift ==")

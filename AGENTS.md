@@ -29,7 +29,7 @@ These apply everywhere in the repo.
 
 - Add a note → update `notes/INDEX.md`.
 - Rename or archive a note → update `notes/INDEX.md` and any `related:` references that point to it.
-- Add a prototype → update `prototypes/prototypes.md` and add a card to `prototypes/index.html`.
+- Add a prototype → update `prototypes/prototypes.md`, add a card to `prototypes/index.html`, **and** add an entry to `window.PROTOTYPES` in `prototypes/shared/proto-switcher.js`.
 - Add a CSS class to `shared/styles.css` → add a row to `prototypes/SYSTEM.md`. If interactive, add a `data-action` entry and wire `shared/ui.js`.
 - Add a skill in `.claude/skills/` → add an entry to `SKILLS.md`.
 - Change a convention → update the relevant reference doc (`SCHEMA.md`, `SYSTEM.md`, `CONVENTIONS.md`).

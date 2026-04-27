@@ -31,9 +31,11 @@ Output format: a new note in `notes/` with `type: note`, `status: synthesised`, 
 2. Copy `prototypes/_template.html` to `prototypes/<name>.html`.
 3. Update `<title>`, brand text in header, and h1.
 4. Edit only the `<main>` content. Use components from `prototypes/SYSTEM.md`.
-5. If interactive, add the appropriate scripts (ui.js / chat.js) before `</body>`.
+5. If interactive, add the appropriate scripts (ui.js / chat.js) before `</body>`. (`proto-switcher.js` is already wired in via `_template.html`.)
 6. Add an entry to `prototypes/prototypes.md` with file, title, status, purpose, components used.
 7. Add a card to `prototypes/index.html` matching that entry.
+8. Add an entry to `window.PROTOTYPES` at the top of `prototypes/shared/proto-switcher.js` so the new prototype shows up in the persistent Cmd+K switcher.
+9. Run `./check.sh` to confirm the three lists are in sync.
 
 ## Add a component to the design system
 

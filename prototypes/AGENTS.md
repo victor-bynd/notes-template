@@ -15,7 +15,7 @@ You should rarely need to scan `shared/styles.css` directly — `SYSTEM.md` is i
 - Every prototype is a single `.html` file at the top level of `prototypes/`. No nested folders for prototypes.
 - Every prototype links to `shared/styles.css` and nothing else as a stylesheet. No inline styles, no per-prototype CSS files.
 - Filename convention: kebab-case, descriptive. Examples: `pricing-table.html`, `chat-with-tools.html`. Never spaces, never camelCase.
-- When you create or rename a prototype: update `prototypes.md` and add a card to `index.html` in the same edit.
+- When you create or rename a prototype: update `prototypes.md`, add a card to `index.html`, **and** add an entry to the `window.PROTOTYPES` array at the top of `shared/proto-switcher.js`. All in the same edit. `check.sh` validates the switcher list matches `prototypes.md`.
 - When you add a new component class: add it to `shared/styles.css`, add a row to `SYSTEM.md`, and add a usage example to `shared/patterns/` if non-trivial. All in the same edit.
 - Do not edit files inside `_examples/`. They're reference content, deletable as a unit.
 

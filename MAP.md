@@ -79,6 +79,7 @@ This template is organised into four distinct layers. Each file belongs to exact
         ├── styles.css              # design system source
         ├── ui.js                   # interactive primitives
         ├── chat.js                 # chat helpers
+        ├── proto-switcher.js       # persistent Cmd+K switcher (auto-injected)
         ├── mermaid.js              # opt-in inline diagram loader (secondary)
         └── patterns/
             ├── chat.html

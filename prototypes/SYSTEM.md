@@ -106,6 +106,30 @@ For dashboard-style prototypes with a persistent left nav.
 | `.app-shell-nav` | Persistent left navigation |
 | `.app-shell-main` | Main content area |
 
+## Prototype switcher (auto-injected)
+
+A persistent command-palette switcher that appears in every prototype. Users press `Cmd+K` (or `Ctrl+K`), or click the small affordance in the bottom-right corner, to open a search overlay listing every prototype. Type to filter, arrow-keys to navigate, Enter to load.
+
+Include in any prototype with one line before `</body>`:
+
+```html
+<script src="shared/proto-switcher.js" defer></script>
+```
+
+(From `_examples/`, the path is `../shared/proto-switcher.js`.)
+
+The list of prototypes is hardcoded at the top of `proto-switcher.js` as the `window.PROTOTYPES` array. Maintain this list alongside `prototypes.md` — `check.sh` will validate they match.
+
+| Class | Role |
+|---|---|
+| `.proto-switcher-button` | Corner affordance (bottom-right) |
+| `.proto-switcher-modal`, `.proto-switcher-card` | Modal overlay + centred card |
+| `.proto-switcher-search` | Filter input |
+| `.proto-switcher-list`, `.proto-switcher-item` | Prototype list + items |
+| `.proto-switcher-item-main`, `.proto-switcher-item-title`, `.proto-switcher-item-purpose`, `.proto-switcher-item-meta` | Item internals |
+| `.proto-switcher-empty`, `.proto-switcher-footer` | Empty state + footer hint |
+| `.is-active` | Active row state (compound, applied to `.proto-switcher-item`) |
+
 See `shared/patterns/sidebar-layout.html` for canonical assembly (persistent vs. slide-in variants).
 
 ## Data attribute hooks (ui.js)
