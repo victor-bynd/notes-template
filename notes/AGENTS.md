@@ -40,9 +40,19 @@ Some operations cross many files (e.g. "update `related:` frontmatter across all
 3. Apply changes file by file.
 4. Update INDEX.md last.
 
+## Diagrams
+
+When the user asks to add a diagram inline (and isn't asking for an editable visual), generate Mermaid in a fenced ```mermaid``` block. Renders natively in markdown.
+
+When the user wants an editable diagram they'll maintain themselves, instruct them to create it in draw.io and save both `<name>.drawio` and `<name>.svg` to `notes/diagrams/`. Reference the export from the note: `![Caption](diagrams/<name>.svg)`. Do not attempt to write `.drawio` XML by hand — it's bulky and error-prone.
+
+`*.drawio` files are listed in `.agentignore` — read the exported `.svg` or `.png` instead when the user references a diagram.
+
 ## Related references
 
 - `SCHEMA.md` — full frontmatter spec, section conventions, tag conventions, glossary
 - `INDEX.md` — the manifest you maintain
+- `diagrams/README.md` — diagram folder convention
 - `../AGENTS.md` — repo-wide agent rules
 - `../PROCESSES.md` — named recipes for common tasks
+- `../CONVENTIONS.md` — full diagram conventions

@@ -64,7 +64,21 @@ Notes with `type: decision` follow a stricter body structure (analogous to ADRs 
 
 ## Diagrams
 
-Default diagram format is **Mermaid**, embedded inline in markdown:
+Two supported workflows — pick based on whether you or an agent is producing the diagram. Full conventions in `../CONVENTIONS.md`.
+
+### draw.io (primary, for human-drawn)
+
+Save source as `notes/diagrams/<name>.drawio`. Export as `notes/diagrams/<name>.svg`. Embed in the note:
+
+```markdown
+![Caption](diagrams/<name>.svg)
+```
+
+Edit the `.drawio` source in the draw.io app; re-export the `.svg` after changes.
+
+### Mermaid (secondary, for AI-generated inline)
+
+Embedded inline in markdown:
 
 ````
 ```mermaid
@@ -74,7 +88,7 @@ flowchart LR
 ```
 ````
 
-Renders natively in GitHub, Obsidian, VSCode preview, and most markdown viewers. For sketchier hand-drawn aesthetic, Excalidraw is acceptable but defer to Mermaid unless you have a specific reason.
+Renders natively in GitHub, Obsidian, VSCode preview. Use when asking Claude to diagram something, or when a quick flowchart works without a separate image file.
 
 ## Glossary
 

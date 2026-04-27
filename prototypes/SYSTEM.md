@@ -142,9 +142,21 @@ Available as `window.Chat` (load `shared/chat.js`):
 
 ## Diagrams
 
-Default format is **Mermaid**, loaded via `shared/mermaid.html`. Drop the include into prototypes that need diagrams; do not load Mermaid in prototypes that don't.
+Two supported workflows. Full conventions in `../CONVENTIONS.md`.
 
-Usage:
+### draw.io (primary, for human-drawn)
+
+Save source as `prototypes/diagrams/<name>.drawio`. Export as `.svg` (preferred) or `.png`. Embed in the prototype:
+
+```html
+<img src="diagrams/<name>.svg" alt="Caption">
+```
+
+Re-export from draw.io after editing the source.
+
+### Mermaid (secondary, for AI-generated inline)
+
+Load `shared/mermaid.js` only in prototypes that need inline-rendered diagrams.
 
 ```html
 <!-- include the loader once, near </body> -->
@@ -156,8 +168,6 @@ flowchart LR
   A --> B
 </pre>
 ```
-
-(In notes, just use ` ```mermaid ` fenced blocks — they render natively in markdown viewers.)
 
 ## Composition rules
 

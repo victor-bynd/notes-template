@@ -59,6 +59,8 @@ This template is organised into four distinct layers. Each file belongs to exact
 │   ├── INDEX.md                    # notes manifest
 │   ├── README.md                   # human-facing pointer
 │   ├── _template.md                # canonical starting point
+│   ├── diagrams/                   # .drawio sources + svg/png exports
+│   │   └── README.md
 │   └── _examples/
 │       └── example-research-note.md
 │
@@ -69,13 +71,15 @@ This template is organised into four distinct layers. Each file belongs to exact
     ├── README.md                   # human-facing pointer
     ├── index.html                  # wayfinding UI
     ├── _template.html              # canonical starting point
+    ├── diagrams/                   # .drawio sources + svg/png exports
+    │   └── README.md
     ├── _examples/
     │   └── example-dashboard.html
     └── shared/
         ├── styles.css              # design system source
         ├── ui.js                   # interactive primitives
         ├── chat.js                 # chat helpers
-        ├── mermaid.js              # diagram loader (opt-in)
+        ├── mermaid.js              # opt-in inline diagram loader (secondary)
         └── patterns/
             ├── chat.html
             └── sidebar-layout.html
@@ -89,7 +93,7 @@ This template is organised into four distinct layers. Each file belongs to exact
 | Add a prototype | `prototypes/AGENTS.md` → `prototypes/SYSTEM.md` → `prototypes/_template.html` → relevant `shared/patterns/*` |
 | Audit design system | `prototypes/SYSTEM.md` → `shared/styles.css` → run `check.sh` |
 | Make a decision note | `notes/SCHEMA.md` (Decision notes section) → `_template.md` |
-| Diagram something | `CONVENTIONS.md` (Diagrams section) |
+| Diagram something | `CONVENTIONS.md` (Diagrams section). Default: draw.io with source + svg export in `diagrams/`. Mermaid for AI-generated inline. |
 
 ## Conventions at a glance
 
@@ -100,7 +104,7 @@ This template is organised into four distinct layers. Each file belongs to exact
 - Stable section headers across all notes.
 - Inline tag conventions: `[#decision]`, `[#claim]`, `[#question]`, `[#blocker]`, `[#todo]`.
 - Stable claim IDs: `[claim:topic-NNN]`.
-- Diagrams: Mermaid by default.
+- Diagrams: draw.io as primary (source + svg export in `diagrams/`); Mermaid for inline AI-generated.
 - Filenames: kebab-case.
 
 For full conventions, see `CONVENTIONS.md`.

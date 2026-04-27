@@ -58,10 +58,18 @@ Common audit prompts:
 
 `check.sh` (at repo root) automates these.
 
+## Diagrams
+
+When generating a diagram inline at runtime, use Mermaid via `shared/mermaid.js`. When the user wants an editable diagram they'll maintain in draw.io, embed the exported `.svg` from `prototypes/diagrams/`: `<img src="diagrams/<name>.svg" alt="Caption">`. Do not write `.drawio` XML by hand.
+
+`*.drawio` files are listed in `.agentignore` — read the exported `.svg` or `.png` instead.
+
 ## Related references
 
 - `SYSTEM.md` — design system vocabulary
 - `prototypes.md` — prototype manifest
 - `shared/patterns/` — copy-paste reference markup for non-trivial assemblies
+- `diagrams/README.md` — diagram folder convention
 - `../AGENTS.md` — repo-wide agent rules
 - `../PROCESSES.md` — named recipes for common tasks
+- `../CONVENTIONS.md` — full diagram conventions

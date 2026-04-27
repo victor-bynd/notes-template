@@ -56,8 +56,12 @@ else:
     # Skip state-modifier classes that exist only as compound selectors.
     # These are documented at the component level, not as standalone classes.
     css_classes -= {'active'}
-    # Extract documented classes from SYSTEM.md (in `.classname` backticks)
-    sys_classes = set(re.findall(r'`\.([a-z][a-z0-9_-]*)`', sys_text))
+    # Extract documented classes from SYSTEM.md (in `.classname` backticks).
+    # Strip file extensions — file extensions are sometimes written as `.svg`,
+    # `.png`, etc. in docs and would otherwise be confused for class references.
+    FILE_EXTENSIONS = {'svg','png','jpg','jpeg','gif','webp','pdf','md','html','htm',
+                       'css','js','json','yaml','yml','xml','txt','sh','drawio','excalidraw'}
+    sys_classes = set(re.findall(r'`\.([a-z][a-z0-9_-]*)`', sys_text)) - FILE_EXTENSIONS
 
     missing_in_doc = css_classes - sys_classes
     missing_in_css = sys_classes - css_classes

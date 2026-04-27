@@ -4,6 +4,9 @@
 # Reference content — read intentionally, not by default
 **/_examples/
 
+# Diagram sources — bulky XML; agents should read the exported svg/png instead
+**/*.drawio
+
 # Archived notes — kept for history, not for synthesis
 notes/archive/
 notes/**/*.archived.md

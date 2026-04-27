@@ -27,7 +27,7 @@ The underlying topic: what makes notes useful inputs to AI agents performing lat
 
 [#question] Do longer summaries (3-4 sentences) outperform shorter ones (1-2) for filtering decisions, or does the opposite hold because longer summaries cause agents to skip the body?
 
-A small dataflow:
+A small dataflow (this one's a Mermaid block — cheap to AI-generate, renders inline in GitHub and most markdown viewers):
 
 ```mermaid
 flowchart LR
@@ -37,6 +37,12 @@ flowchart LR
   C -->|no| B
   D --> E[Indexed in INDEX.md]
   E --> F[Available for synthesis runs]
+```
+
+For diagrams you draw yourself, the convention is draw.io: save `notes/diagrams/<name>.drawio` as the editable source and `notes/diagrams/<name>.svg` as the export, then embed:
+
+```markdown
+![Note lifecycle](diagrams/note-lifecycle.svg)
 ```
 
 ## Synthesis
